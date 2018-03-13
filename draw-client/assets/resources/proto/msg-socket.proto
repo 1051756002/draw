@@ -1,0 +1,21 @@
+import "msg-socket-login.proto";
+import "msg-socket-game.proto";
+
+// 回馈结果
+// [服务端发送, 组合]
+message S_Result_Msg {
+	optional	int32	code = 1;		// 结果代码, 0:成功 >0:失败
+	optional	string	errmsg = 2;		// 异常信息
+}
+
+// 用户信息
+// [服务端发送, 组合]
+message S_User_Msg {
+	optional	int32	userid = 1;		// 用户ID
+	optional	string	nick = 2;		// 昵称
+	optional	string	headimg = 3;	// 头像
+	optional	int32	gender = 4;		// 性别, 1:男 0:女
+	optional	int32	age = 5;		// 年龄
+	optional	string	phone = 6;		// 手机号
+	optional	string	signature = 7;	// 个性签名
+}

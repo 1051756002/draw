@@ -1,0 +1,28 @@
+// 登录
+// Sub_CMD_C_Login
+// [客户端发送]
+message C_Login_Msg {
+	optional	string	username = 1;		// 用户名
+	optional	string	password = 2;		// 密码
+}
+
+// 登录
+// Sub_CMD_S_Login
+// [服务端发送]
+message S_Login_FbMsg {
+	optional	S_Result_Msg	result = 1;	// 回馈结果
+}
+
+// 用户秘钥验证
+// [客户端发送]
+message C_Validate_Msg {
+	optional	string	encrypstring = 1;	// 加密字符串
+	optional	string	encryptkey = 2;		// 加密的秘钥
+}
+
+// 用户秘钥验证回馈
+// [服务端发送]
+message S_Validate_FbMsg {
+	optional	S_Result_Msg	result = 1;	// 回馈结果
+	optional	S_User_Msg		user = 2;	// 用户信息
+}

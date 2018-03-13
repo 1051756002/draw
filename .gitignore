@@ -1,0 +1,20 @@
+## ignore this file##
+#*.meta
+
+## ignore draw.client
+draw-client/library/
+draw-client/node_modules/
+draw-client/local/
+draw-client/temp/
+
+## ignore draw.data
+draw-data/db/
+draw-data/log/
+
+## ignore draw.decompose
+draw-decompose/node_modules/
+draw-decompose/out/
+
+## ignore draw.server
+draw-server/node_modules/
+draw-server/npm-debug.log

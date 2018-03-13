@@ -1,0 +1,23 @@
+{
+	"name": "draw-server",
+	"version": "0.0.1",
+	"description": "You draw me to guess",
+	"main": "index.js",
+	"scripts": {
+		"start": "node app.js"
+	},
+	"author": "ideal",
+	"license": "ISC",
+	"dependencies": {
+		"md5": "^2.2.1",
+		"protobufjs": "^6.8.4",
+		"walkdir": "0.0.12",
+		"ws": "^1.1.1"
+	},
+	"devDependencies": {
+		"chalk": "^2.0.1"
+	},
+	"engines": {
+		"node": ">= 6.0.0"
+	}
+}

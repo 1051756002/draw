@@ -1,0 +1,13 @@
+{
+	"name": "draw-client",
+	"version": "0.0.1",
+	"description": "You draw me to guess",
+	"author": "ideal",
+	"dependencies": {
+		"jquery": "^3.3.1",
+		"cheerio": "0.20.0",
+		"domhandler": "2.3.0",
+		"md5": "^2.2.1",
+		"protobufjs": "^6.8.5"
+	}
+}
