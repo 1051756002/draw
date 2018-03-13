@@ -2,6 +2,8 @@ let config = {};
 
 // 是否为开发模式
 config.debug = true;
+// 是否启动MongoDB
+config.bootMongo = false;
 // 客户端版本号
 config.version = '0.0.1';
 // 服务器配置

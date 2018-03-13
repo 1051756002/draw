@@ -3,6 +3,7 @@ let ideal = {};
 ideal.util = require('../util');
 ideal.config = require('./config');
 ideal.protobuf = require('./protobuf');
+ideal.db = require('../network/db');
 ideal.network = require('../network');
 ideal.service = require('../service');
 
@@ -26,12 +27,24 @@ ideal.init = function(callback) {
 	protobuf.init(function() {
 		// 初始化业务服务器
 		service.init(function() {
-			// 启动服务器
-			network.init(function() {
-				util.logat('%-green', '  Version: {1}', config.version);
-				util.logat('%-green', '  DebugModel: {1}\n', config.debug);
-				util.isDefine(callback) && callback();
-			});
+			if (config.bootMongo) {
+				// 启动数据管理
+				ideal.db.init(function() {
+					// 启动服务器
+					network.init(function() {
+						util.logat('%-green', '  Version: {1}', config.version);
+						util.logat('%-green', '  DebugModel: {1}\n', config.debug);
+						util.isDefine(callback) && callback();
+					});
+				});
+			} else {
+				// 启动服务器
+				network.init(function() {
+					util.logat('%-green', '  Version: {1}', config.version);
+					util.logat('%-green', '  DebugModel: {1}\n', config.debug);
+					util.isDefine(callback) && callback();
+				});
+			}
 		});
 	});
 };
