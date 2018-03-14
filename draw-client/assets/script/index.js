@@ -5,19 +5,19 @@ cc.Class({
     },
 
     onLoad: function() {
-        ideal.init(function() {
-            util.log('%-#0fe029', 'ideal framework initialization end.');
+        let uname = util.getQueryString('uname', util.getCookie('uname'));
+        let token = util.getQueryString('token', util.getCookie('token'));
 
-            // let uname = util.getQueryString('uname', util.getCookie('uname'));
-            // let token = util.getQueryString('token', util.getCookie('token'));
-
-            // if (util.isDefine(uname) && util.isDefine(token)) {
-            //     this.valiToken(uname, token);
-            // } else {
-            //     cc.director.loadScene('login');
-            // }
-            cc.director.loadScene('main');
-        }.bind(this));
+        if (util.isDefine(uname) && util.isDefine(token)) {
+            this.valiToken(uname, token);
+        } else {
+            cc.director.loadScene('login');
+        }
+        
+        // ideal.init(function() {
+        //     util.log('%-#0fe029', 'ideal framework initialization end.');
+        //     // cc.director.loadScene('main');
+        // }.bind(this));
     },
 
     valiToken: function(uname, token) {

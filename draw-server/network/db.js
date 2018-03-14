@@ -51,7 +51,7 @@ db.add = function(table, data = {}, callback) {
 				code: 0,
 				n: ret.result.n,
 			};
-			util.logat('%-gray', '  add count {1}', result.result.n);
+			util.logat('%-gray', '  add count {1}', ret.result.n);
 		}
 
 		util.isDefine(callback) && callback(result);
@@ -126,7 +126,7 @@ db.init = function(callback) {
 
 		util.log('%-green', '  Connection success.\n');
 
-		_db = client.db('ideal');
+		_db = client.db('draw');
 
 		util.isDefine(callback) && callback();
 	});

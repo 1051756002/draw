@@ -12,7 +12,9 @@
 		"md5": "^2.2.1",
 		"protobufjs": "^6.8.4",
 		"walkdir": "0.0.12",
-		"ws": "^1.1.1"
+		"ws": "^1.1.1",
+		"mongodb": "^3.0.3",
+		"node-uuid": "^1.4.8"
 	},
 	"devDependencies": {
 		"chalk": "^2.0.1"
