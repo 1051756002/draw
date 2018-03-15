@@ -11,11 +11,12 @@ message S_Result_Msg {
 // 用户信息
 // [服务端发送, 组合]
 message S_User_Msg {
-	optional	int32	userid = 1;		// 用户ID
+	optional	string	username = 1;	// 用户名/账号
 	optional	string	nick = 2;		// 昵称
 	optional	string	headimg = 3;	// 头像
 	optional	int32	gender = 4;		// 性别, 1:男 0:女
 	optional	int32	age = 5;		// 年龄
 	optional	string	phone = 6;		// 手机号
 	optional	string	signature = 7;	// 个性签名
+	optional	int32	onlinetime = 8;	// 最后上线时间
 }

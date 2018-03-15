@@ -4,6 +4,7 @@ ideal.util = require('../util/util');
 ideal.config = require('./config');
 ideal.protobuf = require('./protobuf');
 ideal.conn = require('../network/connector');
+ideal.data = require('../data/data');
 
 window.$ = require('jquery');
 window.ideal = ideal;

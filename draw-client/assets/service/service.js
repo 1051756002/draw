@@ -5,8 +5,10 @@
 let service = {
 	// 登录模块
 	login: require('./service-login'),
-	// 业务模块
-	game: require('./service-game'),
+	// 房间模块
+	room: require('./service-room'),
+	// 画板模块
+	draw: require('./service-draw'),
 };
 
 let serviceList = [];
@@ -18,6 +20,10 @@ for (let k in service) {
 service.sendMsg = function(type, data) {
 	let exist = false;
 	for (let i = 0; i < serviceList.length; i++) {
+		// 不存在此API
+		if (!serviceList[i].sendMsg) {
+			continue;
+		}
 		exist = serviceList[i].sendMsg(type, data);
 		if (exist) { break; }
 	}
@@ -31,6 +37,10 @@ service.sendMsg = function(type, data) {
 service.parseMsg = function(mainCmd, subCmd, bodyBuff) {
 	let exist = false;
 	for (let i = 0; i < serviceList.length; i++) {
+		// 不存在此API
+		if (!serviceList[i].parseMsg) {
+			continue;
+		}
 		exist = serviceList[i].parseMsg(mainCmd, subCmd, bodyBuff);
 		if (exist) { break; }
 	}

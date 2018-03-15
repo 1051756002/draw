@@ -13,11 +13,6 @@ cc.Class({
         } else {
             cc.director.loadScene('login');
         }
-        
-        // ideal.init(function() {
-        //     util.log('%-#0fe029', 'ideal framework initialization end.');
-        //     // cc.director.loadScene('main');
-        // }.bind(this));
     },
 
     valiToken: function(uname, token) {
@@ -32,7 +27,10 @@ cc.Class({
 
         let successFn = function(res) {
             if (res.code == 0) {
-                cc.director.loadScene('main');
+                // 保存用户信息
+                ideal.data.user = res.user;
+
+                cc.director.loadScene('room');
             } else {
                 cc.director.loadScene('login');
             }

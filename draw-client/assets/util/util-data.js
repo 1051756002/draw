@@ -2,10 +2,11 @@ let _util = {};
 
 // 深拷贝
 _util.clone = function(obj) {
+	if (typeof obj !== 'object' || obj === null) {
+		return null;
+	}
 	var str, newobj = obj.constructor === Array ? [] : {};
-	if (typeof obj !== 'object') {
-		return;
-	} else if (window.JSON) {
+	if (JSON) {
 		str = JSON.stringify(obj), newobj = JSON.parse(str);
 	} else {
 		for (var i in obj) {
@@ -62,6 +63,16 @@ _util.olen = function(obj) {
 	return len;
 };
 
+// 获取对象中指定键值的项
+_util.okey = function(obj, key, val) {
+	for (let i in obj) {
+		if (obj[i][key] == val) {
+			return obj[i];
+		}
+	}
+	return null;
+};
+
 // 合并对象
 _util.merge = function(def, obj) {
 	for (var k in def) {
@@ -70,16 +81,6 @@ _util.merge = function(def, obj) {
 		}
 	}
 	return obj;
-};
-
-// 求和坐标
-_util.sumPoint = function(p1, p2) {
-	return cc.p(p1.x + p2.x, p1.y + p2.y);
-};
-
-// 求差坐标
-_util.subPoint = function(p1, p2) {
-	return cc.p(p1.x - p2.x, p1.y - p2.y);
 };
 
 module.exports = _util;

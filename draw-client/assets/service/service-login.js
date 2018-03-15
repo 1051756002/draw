@@ -21,6 +21,9 @@ service.parseMsg = function(mainCmd, subCmd, bodyBuff) {
 
 	let exist = true;
 	switch (subCmd) {
+		case CMD.Sub_CMD_S_Login:
+			recv_login(bodyBuff);
+			break;
 		default:
 			exist = false;
 			break;
@@ -35,7 +38,7 @@ let send_login = function(data) {
 	let model = protobuf['C_Login_Msg'];
 	let example = model.create({
 		username: data.username,
-		password: data.password,
+		token: data.token,
 	});
 	let bodyBuff = model.encode(example).finish();
 
@@ -50,11 +53,13 @@ let recv_login = function(bodyBuff) {
 	let example = model.decode(bodyBuff);
 
 	// 登录失败
-	let result = example.resultbean;
+	let result = example.result;
 	if (result.code != 0) {
 		util.log(result);
 		return;
 	}
+
+	ideal.conn.send('match');
 };
 
 

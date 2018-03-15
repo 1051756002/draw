@@ -36,7 +36,12 @@ cc.Class({
             success: function(res) {
                 if (res.code == 0) {
                     util.log('登录成功！');
-                    util.log('token: ' + res.token);
+                    
+                    // 保存用户信息
+                    ideal.data.user = {
+                        username: param.u,
+                        token: res.token,
+                    };
 
                     cc.director.loadScene('room');
                 } else {

@@ -7,6 +7,33 @@ message C_Test_Msg {
 // Sub_CMD_S_Enter
 // [服务端发送]
 message S_Test_FbMsg {
-	optional	S_Result_Msg result = 1;	// 回馈结果
+	optional	S_Result_Msg	result = 1;	// 回馈结果
 	optional	string	value = 2;			// 测试值
+}
+
+// Sub_CMD_C_Match
+// [客户端发送]
+message C_Match_Msg {
+}
+
+// Sub_CMD_S_Match
+// [服务端发送]
+message S_Match_FbMsg {
+	optional	S_Result_Msg	result = 1;		// 回馈结果
+	optional	int32			roomid = 2;		// 房间ID
+	repeated	S_User_Msg		userlist = 3;	// 房间内的玩家列表
+}
+
+// Sub_CMD_S_Leave
+// [服务端发送]
+message S_LeaveRoom_Msg {
+	optional	int32			roomid = 1;		// 房间ID
+	repeated	S_User_Msg		userlist = 3;	// 房间内的玩家列表
+}
+
+// Sub_CMD_S_Join
+// [服务端发送]
+message S_JoinRoom_Msg {
+	optional	int32			roomid = 1;		// 房间ID
+	repeated	S_User_Msg		userlist = 3;	// 房间内的玩家列表
 }

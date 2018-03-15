@@ -32,6 +32,12 @@ config.notlog_recv = [0];
 // 不打印日志的接收命令
 config.notlog_send = [0];
 
+// 通讯数据格式(Communication data format)
+config.cdf = {
+	lowerLen: 6,
+	head: [1005],
+};
+
 // proto文件列表
 config.protolist = [
 	'./proto/msg-socket.proto',

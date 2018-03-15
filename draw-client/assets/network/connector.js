@@ -58,11 +58,11 @@ connector.send = function(type, data) {
 
 // 向服务器发送消息
 connector.sendMsg = function(mainCmd, subCmd, bodyBuff = []) {
-	let lowerLen = 6;
+	let lowerLen = config.cdf.lowerLen;
 	let bufferLen = (bodyBuff ? bodyBuff.byteLength : 0) + lowerLen;
 	let buffer = new ArrayBuffer(bufferLen);
 	// 消息头
-	new Uint16Array(buffer, 0, 1).set([1005]);
+	new Uint16Array(buffer, 0, 1).set(config.cdf.head);
 	// 消息命令
 	new Uint16Array(buffer, 2, 2).set([mainCmd, subCmd]);
 	// 消息内容
@@ -75,7 +75,7 @@ connector.sendMsg = function(mainCmd, subCmd, bodyBuff = []) {
 	}
 
 	if (util.isEmpty(config.notlog_send) || config.notlog_send.indexOf(mainCmd) == -1) {
-		util.log(util.format('%c发送: main={1}\tsub={2}\tbodyLen={3}', mainCmd, subCmd, bufferLen - lowerLen), 'color:#0fe029');
+		util.log(util.format('%c发送: main={1}  sub={2}  bodyLen={3}', mainCmd, subCmd, bufferLen - lowerLen), 'color:#0fe029');
 	}
 
 	this.socket.send(buffer);
@@ -195,26 +195,24 @@ let receiveMsg = function(buffer) {
 			return;
 		}
 
+		let lowerLen = config.cdf.lowerLen;
 		// 消息头部
-		let msgHead = new Uint8Array(buffer, 0, 2);
+		let msgHead = new Uint16Array(buffer, 0, 1);
 		// 消息命令部分
-		let msgCmd = new Uint16Array(buffer, 2, 4);
+		let msgCmd = new Uint16Array(buffer, 2, 2);
 		// 消息参数
-		let msgBody = new Uint8Array(buffer, 10);
+		let msgBody = new Uint8Array(buffer, lowerLen);
 
-		if (msgHead[0] != 6) {
+		if (msgHead[0] != config.cdf.head[0]) {
 			throw ({ msg: '包头验证失败' });
 		}
-		if (buffer.byteLength != msgCmd[0]) {
-			throw ({ msg: '包长错误' });
-		}
 
-		let mainCmd = msgCmd[2];
-		let subCmd = msgCmd[3];
+		let mainCmd = msgCmd[0];
+		let subCmd = msgCmd[1];
 		let bodyBuff = new Uint8Array(msgBody);
 
 		if (config.notlog_recv.indexOf(mainCmd) == -1) {
-			util.log(util.format('%c接收: main={1}, sub={2}, bodyLen={3}', mainCmd, subCmd, bodyBuff ? bodyBuff.byteLength : 0), 'color:#ea681c');
+			util.log(util.format('%c接收: main={1}  sub={2}  bodyLen={3}', mainCmd, subCmd, bodyBuff ? bodyBuff.byteLength : 0), 'color:#ea681c');
 		}
 
 		service.parseMsg(mainCmd, subCmd, bodyBuff);

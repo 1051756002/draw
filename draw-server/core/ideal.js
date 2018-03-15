@@ -6,6 +6,7 @@ ideal.protobuf = require('./protobuf');
 ideal.db = require('../network/db');
 ideal.network = require('../network');
 ideal.service = require('../service');
+ideal.data = require('../data');
 
 // 定义全局命名空间
 global.ideal = ideal;

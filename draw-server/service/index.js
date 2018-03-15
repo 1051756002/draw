@@ -7,11 +7,39 @@ let service = {
 	_source: {},
 };
 
+// 基于socket.send扩展
+service.send = function(mainCmd, subCmd, bodyBuff) {
+	let lowerLen = config.cdf.lowerLen;
+	let bufferLen = (bodyBuff ? bodyBuff.byteLength : 0) + lowerLen;
+	let buffer = new ArrayBuffer(bufferLen);
+	// 消息头
+	new Uint16Array(buffer, 0, 1).set(config.cdf.head);
+	// 消息命令
+	new Uint16Array(buffer, 2, 2).set([mainCmd, subCmd]);
+	// 消息内容
+	if (bufferLen > lowerLen) {
+		new Uint8Array(buffer, lowerLen).set(bodyBuff);
+	}
+
+	if (this.readyState != this.OPEN) {
+		util.log('%-gray', '  The client has been disconnected, sending failure.');
+		return;
+	}
+
+	this.send(buffer);
+};
+
 // 发送指令
-service.send = function(type, data) {
+service.sendMsg = function(mainCmd, subCmd, bodyBuff) {
+	util.logat('%-gray', ' Send - Main: {1}, Sub: {2}', mainCmd, subCmd);
+
 	let exist = false;
-	for (let i = 0; i < serviceList.length; i++) {
-		exist = serviceList[i].send(type, data);
+	for (let i in service._source) {
+		// 不存在此API
+		if (!service._source[i].sendMsg) {
+			continue;
+		}
+		exist = service._source[i].sendMsg.call(this, mainCmd, subCmd, bodyBuff);
 		if (exist) { break; }
 	}
 
@@ -22,11 +50,15 @@ service.send = function(type, data) {
 
 // 解析消息
 service.parseMsg = function(mainCmd, subCmd, bodyBuff) {
-	util.logat('%-gray', '  Main: {1}, Sub: {2}', mainCmd, subCmd);
+	util.logat('%-gray', ' Recv - Main: {1}, Sub: {2}', mainCmd, subCmd);
 
 	let exist = false;
-	for (let i in this._source) {
-		exist = this._source[i].parseMsg(mainCmd, subCmd, bodyBuff);
+	for (let i in service._source) {
+		// 不存在此API
+		if (!service._source[i].parseMsg) {
+			continue;
+		}
+		exist = service._source[i].parseMsg.call(this, mainCmd, subCmd, bodyBuff);
 		if (exist) { break; }
 	}
 
