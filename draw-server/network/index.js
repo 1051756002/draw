@@ -51,34 +51,43 @@ let onInterrupt = function() {
 	let CMD = require('../service/config')['Main_CMD_Room'];
 
 	for (let i in roomlist) {
+		// 房间信息
 		let room = roomlist[i];
+		// 房间内用户信息
+		let ruser = room.userlist[username];
 
 		// 不在此房间
-		if (util.isEmpty(room.userlist[username])) {
+		if (util.isEmpty(ruser)) {
 			continue;
 		}
 
 		// 房间正空闲中, 直接退出房间
 		if (room.status == 0) {
+			// 房间只有房主一人, 解散此房间
+			if (util.olen(room.userlist) == 1) {
+				delete roomlist[i];
+				break;
+			}
+
 			delete room.userlist[username];
 
-			let data = {
-				roomid: room.roomid,
-				userlist: ideal.data.getRoomUserList(room.roomid),
-			};
+			// 此玩家为房主身份, 将房主转让给其他成员
+			if (ruser.identity == 1) {
+				let unames = Object.keys(room.userlist);
+				room.userlist[unames[0]].identity = 1;
+			}
 
 			// 通知此房间内每一位玩家, 此号退出房间了
-			let unames = Object.keys(room.userlist);
-
-			for (let j in unames) {
-				let cli = ideal.data.clientlist[unames[j]];
-				service.sendMsg.call(cli, CMD.Main, CMD.Sub_CMD_S_Leave, data);
-			};
+			service.notice.call(client, room.roomid, CMD.Main, CMD.Sub_CMD_P_Leave, {
+				roomid: room.roomid,
+				userlist: ideal.data.getRoomUserList(room.roomid),
+			});
 		}
 		// 房间正在进行中
 		else if (room.status == 1) {
 			// todo ...
 		}
+		break;
 	};
 };
 

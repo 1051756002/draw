@@ -29,8 +29,35 @@ service.send = function(mainCmd, subCmd, bodyBuff) {
 	this.send(buffer);
 };
 
+// 通知房间内的其他玩家
+service.notice = function(roomid, mainCmd, subCmd, noticeData) {
+	// 房间列表
+	let roomlist = ideal.data.roomlist;
+	// 房间内玩家列表
+	let userlist = roomlist[roomid].userlist;
+	// 自己的用户名/账号
+	let username = this.user.username;
+
+	// 通知此房间内每一位玩家
+	let unames = Object.keys(userlist);
+
+	for (let i in unames) {
+		// 不通知自己
+		if (unames[i] == username) { continue; }
+
+		let cli = ideal.data.clientlist[unames[i]];
+		service.sendMsg.call(cli, mainCmd, subCmd, noticeData);
+	};
+};
+
+// 通知房间内的单个玩家
+service.notice2 = function(username, mainCmd, subCmd, noticeData) {
+	let cli = ideal.data.clientlist[username];
+	service.sendMsg.call(cli, mainCmd, subCmd, noticeData);
+};
+
 // 发送指令
-service.sendMsg = function(mainCmd, subCmd, bodyBuff) {
+service.sendMsg = function(mainCmd, subCmd, data) {
 	util.logat('%-gray', ' Send - Main: {1}, Sub: {2}', mainCmd, subCmd);
 
 	let exist = false;
@@ -39,7 +66,7 @@ service.sendMsg = function(mainCmd, subCmd, bodyBuff) {
 		if (!service._source[i].sendMsg) {
 			continue;
 		}
-		exist = service._source[i].sendMsg.call(this, mainCmd, subCmd, bodyBuff);
+		exist = service._source[i].sendMsg.call(this, mainCmd, subCmd, data);
 		if (exist) { break; }
 	}
 

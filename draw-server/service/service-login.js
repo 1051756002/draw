@@ -1,7 +1,7 @@
 let _service = {};
 let CMD = require('./config')['Main_CMD_Login'];
 
-_service.sendMsg = function(mainCmd, subCmd, bodyBuff) {
+_service.sendMsg = function(mainCmd, subCmd, data) {
 	if (CMD.Main != mainCmd) {
 		return false;
 	}
@@ -9,7 +9,7 @@ _service.sendMsg = function(mainCmd, subCmd, bodyBuff) {
 	let exist = true;
 	switch (subCmd) {
 		case CMD.Sub_CMD_S_Login:
-			send_login.call(this, bodyBuff);
+			send_login.call(this, data);
 			break;
 		default:
 			exist = false;

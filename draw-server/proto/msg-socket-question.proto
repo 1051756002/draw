@@ -1,0 +1,53 @@
+
+// Sub_CMD_P_GetQuestion
+// [服务端发送]
+message S_GetQuestion_Msg {
+	optional	int32			roomid = 1;			// 房间ID
+	repeated	S_Question_Msg	questionlist = 3;	// 问题列表
+}
+
+// Sub_CMD_C_Choice
+// [客户端发送]
+message C_Choice_Msg {
+	optional	int32			roomid = 1;			// 房间ID
+	optional	int32			questionid = 2;		// 问题ID
+}
+
+// Sub_CMD_S_Choice
+// [服务端发送]
+message S_Choice_FbMsg {
+	optional	int32			roomid = 1;			// 房间ID
+	optional	S_Question_Msg	question = 2;		// 问题信息
+	optional	S_Result_Msg	result = 3;			// 回馈结果
+}
+
+// Sub_CMD_P_Choice
+// [服务端发送]
+message S_Choice_Msg {
+	optional	int32			roomid = 1;			// 房间ID
+	optional	S_Question_Msg	question = 2;		// 问题信息
+}
+
+// Sub_CMD_C_Answer
+// [客户端发送]
+message C_Answer_Msg {
+	optional	int32			roomid = 1;			// 房间ID
+	optional	int32			questionid = 2;		// 问题ID
+	optional	string			answer = 3;			// 答案
+}
+
+// Sub_CMD_S_Answer
+// [服务端发送]
+message S_Answer_FbMsg {
+	optional	int32			roomid = 1;			// 房间ID
+	optional	S_Result_Msg	result = 2;			// 回馈结果
+}
+
+// Sub_CMD_P_Answer
+// [服务端发送]
+message S_Answer_Msg {
+	optional	int32			roomid = 1;			// 房间ID
+	optional	string			username = 2;		// 答题用户
+	optional	string			answer = 3;			// 答案
+	optional	int32			correct = 4;		// 回答结果 1.正确 0.错误
+}

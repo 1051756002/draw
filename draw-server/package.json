@@ -4,7 +4,8 @@
 	"description": "You draw me to guess",
 	"main": "index.js",
 	"scripts": {
-		"start": "node app.js"
+		"start": "node app.js",
+		"login": "node login.js"
 	},
 	"author": "ideal",
 	"license": "ISC",

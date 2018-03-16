@@ -1,0 +1,87 @@
+
+// Sub_CMD_C_Match
+// [客户端发送]
+message C_Match_Msg {
+}
+
+// Sub_CMD_S_Match
+// [服务端发送]
+message S_Match_FbMsg {
+	optional	S_Result_Msg	result = 1;		// 回馈结果
+	optional	int32			roomid = 2;		// 房间ID
+	repeated	S_RoomUser_Msg	userlist = 3;	// 房间内的玩家列表
+}
+
+// Sub_CMD_P_Leave
+// [服务端发送]
+message S_LeaveRoom_Msg {
+	optional	int32			roomid = 1;		// 房间ID
+	repeated	S_RoomUser_Msg	userlist = 2;	// 房间内的玩家列表
+}
+
+// Sub_CMD_P_Join
+// [服务端发送]
+message S_JoinRoom_Msg {
+	optional	int32			roomid = 1;		// 房间ID
+	repeated	S_RoomUser_Msg	userlist = 2;	// 房间内的玩家列表
+}
+
+// Sub_CMD_C_Ready
+// [客户端发送]
+message C_RoomReady_Msg {
+	optional	int32			roomid = 1;		// 房间ID
+}
+
+// Sub_CMD_S_Ready
+// [服务端发送]
+message S_RoomReady_FbMsg {
+	optional	int32			roomid = 1;		// 房间ID
+	optional	S_Result_Msg	result = 2;		// 回馈结果
+}
+
+// Sub_CMD_P_Ready
+// [服务端发送]
+message S_RoomReady_Msg {
+	optional	int32			roomid = 1;		// 房间ID
+	repeated	S_RoomUser_Msg	userlist = 2;	// 房间内的玩家列表
+}
+
+// Sub_CMD_C_UnReady
+// [客户端发送]
+message C_RoomUnReady_Msg {
+	optional	int32			roomid = 1;		// 房间ID
+}
+
+// Sub_CMD_S_UnReady
+// [服务端发送]
+message S_RoomUnReady_FbMsg {
+	optional	int32			roomid = 1;		// 房间ID
+	optional	S_Result_Msg	result = 2;		// 回馈结果
+}
+
+// Sub_CMD_P_UnReady
+// [服务端发送]
+message S_RoomUnReady_Msg {
+	optional	int32			roomid = 1;		// 房间ID
+	repeated	S_RoomUser_Msg	userlist = 2;	// 房间内的玩家列表
+}
+
+// Sub_CMD_C_Play
+// [客户端发送]
+message C_RoomPlay_Msg {
+	optional	int32			roomid = 1;		// 房间ID
+}
+
+// Sub_CMD_S_Play
+// [服务端发送]
+message S_RoomPlay_FbMsg {
+	optional	int32			roomid = 1;		// 房间ID
+	optional	S_Result_Msg	result = 2;		// 回馈结果
+}
+
+// Sub_CMD_P_Play
+// [服务端发送]
+message S_RoomPlay_Msg {
+	optional	int32			roomid = 1;		// 房间ID
+	repeated	S_RoomUser_Msg	userlist = 2;	// 房间内的玩家列表
+}

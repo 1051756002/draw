@@ -1,10 +1,11 @@
 import "msg-socket-login.proto";
-import "msg-socket-game.proto";
+import "msg-socket-room.proto";
+import "msg-socket-draw.proto";
 
 // 回馈结果
 // [服务端发送, 组合]
 message S_Result_Msg {
-	optional	int32	code = 1;		// 结果代码, 0:成功 >0:失败
+	optional	int32	code = 1;		// 结果代码, 0.成功 >0.失败
 	optional	string	errmsg = 2;		// 异常信息
 }
 
@@ -14,9 +15,42 @@ message S_User_Msg {
 	optional	string	username = 1;	// 用户名/账号
 	optional	string	nick = 2;		// 昵称
 	optional	string	headimg = 3;	// 头像
-	optional	int32	gender = 4;		// 性别, 1:男 0:女
+	optional	int32	gender = 4;		// 性别, 0.女 1.男
 	optional	int32	age = 5;		// 年龄
 	optional	string	phone = 6;		// 手机号
 	optional	string	signature = 7;	// 个性签名
 	optional	int32	onlinetime = 8;	// 最后上线时间
+}
+
+// 房间内用户信息
+// [服务端发送, 组合]
+message S_RoomUser_Msg {
+	optional	string	username = 1;	// 用户名/账号
+	optional	string	nick = 2;		// 昵称
+	optional	string	headimg = 3;	// 头像
+	optional	int32	identity = 4;	// 身份, 0.成员 1.房主
+	optional	int32	status = 5;		// 状态, 0.未准备 1.已准备
+}
+
+// 问题信息
+// [服务端发送, 组合]
+message S_Question_Msg {
+	optional	int32	id = 1;			// ID
+	optional	string	answer = 2;		// 答案
+	optional	string	hint = 3;		// 暗示
+}
+
+// 坐标点
+// [服务端发送, 组合]
+message S_Point_Msg {
+	optional	int32	x = 1;
+	optional	int32	y = 2;
+}
+
+// 线条
+// [服务端发送, 组合]
+message S_Line_Msg {
+	optional	S_Point_Msg	points = 1;		// 坐标列表
+	optional	int32		width = 2;		// 线条粗细
+	optional	string		color = 3;		// 线条颜色
 }
