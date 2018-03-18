@@ -106,7 +106,16 @@ service.init = function(callback) {
 			return;
 		}
 
-		let arr = path.split('\\');
+		let arr = [];
+		// PC系统路径格式
+		if (path.indexOf('\\') > -1) {
+			arr = path.split('\\');
+		}
+		// 苹果系统路径格式
+		else {
+			arr = path.split('/');
+		}
+
 		arr = arr.splice(arr.lastIndexOf('service') + 1);
 
 		// 重定义文件名, 且用来做业务键值

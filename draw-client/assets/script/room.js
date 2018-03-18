@@ -9,7 +9,6 @@ cc.Class({
     },
 
     onLoad: function () {
-        window.kk = this;
     	this.init();
     	this.bindEvents();
     },
@@ -93,8 +92,7 @@ cc.Class({
             return;
         }
 
-        util.log('开始游戏');
-        // cc.director.loadScene('main');
+        cc.director.loadScene('main');
     },
 
     onReadyFb: function(data) {
@@ -161,6 +159,8 @@ cc.Class({
 
         this.updateButton();
         this.updateUserList();
+        
+        cc.director.loadScene('main');
     },
 
     onPushReady: function(data) {

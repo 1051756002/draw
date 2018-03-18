@@ -3,7 +3,7 @@
 // [服务端发送]
 message S_GetQuestion_Msg {
 	optional	int32			roomid = 1;			// 房间ID
-	repeated	S_Question_Msg	questionlist = 3;	// 问题列表
+	repeated	S_Question_Msg	questionlist = 2;	// 问题列表
 }
 
 // Sub_CMD_C_Choice

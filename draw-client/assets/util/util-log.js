@@ -10,12 +10,14 @@ _util.log = function() {
 		args.push(arguments[i]);
 	}
 
-	// 字体颜色过滤
-	let result = args[0].toString().match(/^%-#([a-z|0-9]*)$/i);
-	if (result != null && result.length == 2) {
-		args[1] = '%c' + args[1];
-		args.push('color:#' + result[1]);
-		args.shift();
+	if (typeof args[0] == 'string') {
+		// 字体颜色过滤
+		let result = args[0].match(/^%-#([a-z|0-9]*)$/i);
+		if (result != null && result.length == 2) {
+			args[1] = '%c' + args[1];
+			args.push('color:#' + result[1]);
+			args.shift();
+		}
 	}
 
 	console.log.apply(console, args);

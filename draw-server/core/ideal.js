@@ -24,6 +24,7 @@ config.server.forEach(function(server) {
 // 初始化架构
 ideal.init = function(callback) {
 	util.clear();
+
 	// 加载protobuf
 	protobuf.init(function() {
 		// 初始化业务服务器

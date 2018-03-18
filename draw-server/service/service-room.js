@@ -330,10 +330,13 @@ let recv_play = function(bodyBuff) {
 			// ############ 有序的给一名玩家推送题目
 			let username = ideal.data.getTopicUser(roomid);
 			let CMDQ = require('./config')['Main_CMD_Question'];
-			service.notice2(username, CMDQ.Main, Sub_CMD_P_GetQuestion, {
-				roomid: roomid,
-				questionlist: ideal.data.getRandomTopic(),
-			});
+			// 延迟600ms, 避免场景切换慢
+			setTimeout(function() {
+				service.notice2(username, CMDQ.Main, CMDQ.Sub_CMD_P_GetQuestion, {
+					roomid: roomid,
+					questionlist: ideal.data.getRandomTopic(),
+				});
+			}, 600);
 
 			// 当前题库, 设置出题人
 			room.topic.username = username;

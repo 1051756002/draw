@@ -1,6 +1,7 @@
 import "msg-socket-login.proto";
 import "msg-socket-room.proto";
 import "msg-socket-draw.proto";
+import "msg-socket-question.proto";
 
 // 回馈结果
 // [服务端发送, 组合]
@@ -50,7 +51,7 @@ message S_Point_Msg {
 // 线条
 // [服务端发送, 组合]
 message S_Line_Msg {
-	optional	S_Point_Msg	points = 1;		// 坐标列表
+	repeated	S_Point_Msg	points = 1;		// 坐标列表
 	optional	int32		width = 2;		// 线条粗细
 	optional	string		color = 3;		// 线条颜色
 }

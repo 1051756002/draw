@@ -51,25 +51,38 @@ _util.getIp = function() {
 	let os = require('os');
 	let ifaces = os.networkInterfaces();
 
+	let reg = /^192\.168\.(1\d{2}|2[0-4]\d|25[0-5]|[1-9]\d|\d)\.(1\d{2}|2[0-4]\d|25[0-5]|[1-9]\d|\d)$/;
 	for (let t in ifaces) {
 		ips = ifaces[t];
-		// 苹果系统, 以太网
-		if ('WLAN' == t) {
-			break;
-		}
 
-		// Windows系统, 本地连接
-		if (/^本地连接/.test(t)) {
-			break;
+		for (let i in ips) {
+			if (ips[i].address) {
+				if (reg.test(ips[i].address)) {
+					return ips[i].address;
+				}
+			}
 		}
 	}
 
-	for (let i = 0; i < ips.length; i++) {
-		if (ips[i].family == 'IPv4') {
-			ip = ips[i].address;
-			break;
-		}
-	}
+	// for (let t in ifaces) {
+	// 	ips = ifaces[t];
+	// 	// 苹果系统, 以太网
+	// 	if ('WLAN' == t) {
+	// 		break;
+	// 	}
+
+	// 	// Windows系统, 本地连接
+	// 	if (/^本地连接/.test(t)) {
+	// 		break;
+	// 	}
+	// }
+
+	// for (let i = 0; i < ips.length; i++) {
+	// 	if (ips[i].family == 'IPv4') {
+	// 		ip = ips[i].address;
+	// 		break;
+	// 	}
+	// }
 	return ip;
 };
 

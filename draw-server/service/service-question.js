@@ -18,10 +18,10 @@ _service.sendMsg = function(mainCmd, subCmd, data) {
 			send_answer.call(this, data);
 			break;
 		case CMD.Sub_CMD_P_Answer:
-			push_answer.call(this, bodyBuff);
+			push_answer.call(this, data);
 			break;
 		case CMD.Sub_CMD_P_Choice:
-			push_choice.call(this, bodyBuff);
+			push_choice.call(this, data);
 			break;
 		default:
 			exist = false;

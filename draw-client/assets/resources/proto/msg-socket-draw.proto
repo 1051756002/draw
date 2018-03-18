@@ -20,6 +20,25 @@ message S_Draw_Msg {
 	optional	S_Line_Msg		line = 2;		// 线条
 }
 
+// Sub_CMD_C_Clean
+// [客户端发送]
+message C_Clean_Msg {
+	optional	int32			roomid = 1;		// 房间ID
+}
+
+// Sub_CMD_S_Clean
+// [服务端发送]
+message S_Clean_FbMsg {
+	optional	int32			roomid = 1;		// 房间ID
+	optional	S_Result_Msg	result = 2;		// 回馈结果
+}
+
+// Sub_CMD_P_Clean
+// [服务端发送]
+message S_Clean_Msg {
+	optional	int32			roomid = 1;		// 房间ID
+}
+
 // Sub_CMD_C_Submit
 // [客户端发送]
 message C_Submit_Msg {

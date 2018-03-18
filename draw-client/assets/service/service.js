@@ -9,6 +9,8 @@ let service = {
 	room: require('./service-room'),
 	// 画板模块
 	draw: require('./service-draw'),
+	// 题目模块
+	question: require('./service-question'),
 };
 
 let serviceList = [];

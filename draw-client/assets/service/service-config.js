@@ -29,10 +29,36 @@ module.exports = {
 		Sub_CMD_P_UnReady: 2004,	// [推送] 取消准备
 		Sub_CMD_P_Play: 2005,		// [推送] 开始游戏
 	},
-	Main_CMD_Draw: {
+	Main_CMD_Question: {
 		// 主指令
 		Main: 3,
 
 		// 副指令
+		Sub_CMD_C_Choice: 1,			// [请求] 选择题目
+		Sub_CMD_C_Answer: 2,			// [请求] 提交答案
+
+		Sub_CMD_S_Choice: 1001,			// [回馈] 选择题目
+		Sub_CMD_S_Answer: 1002,			// [回馈] 提交答案
+
+		Sub_CMD_P_GetQuestion: 2001,	// [回馈] 获取题目
+		Sub_CMD_P_Choice: 2002,			// [推送] 选择题目
+		Sub_CMD_P_Answer: 2003,			// [推送] 提交答案
+	},
+	Main_CMD_Draw: {
+		// 主指令
+		Main: 4,
+
+		// 副指令
+		Sub_CMD_C_Draw: 1,			// [请求] 画
+		Sub_CMD_C_Submit: 2,		// [请求] 提交作品
+		Sub_CMD_C_Clean: 3,			// [请求] 清除
+
+		Sub_CMD_S_Draw: 1001,		// [回馈] 画
+		Sub_CMD_S_Submit: 1002,		// [回馈] 提交作品
+		Sub_CMD_S_Clean: 1003,		// [回馈] 清除
+
+		Sub_CMD_P_Draw: 2001,		// [推送] 画
+		Sub_CMD_P_Submit: 2002,		// [推送] 提交作品
+		Sub_CMD_P_Clean: 2003,		// [推送] 清除
 	},
 };

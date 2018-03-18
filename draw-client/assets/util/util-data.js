@@ -83,4 +83,9 @@ _util.merge = function(def, obj) {
 	return obj;
 };
 
+// 坐标相减
+_util.subPoint = function(point1, point2) {
+	return cc.p(point1.x - point2.x, point1.y - point2.y);
+};
+
 module.exports = _util;

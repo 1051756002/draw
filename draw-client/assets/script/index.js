@@ -2,11 +2,17 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
+        persistNodes: [cc.Node],
     },
 
     onLoad: function() {
         let uname = util.getQueryString('uname', util.getCookie('uname'));
         let token = util.getQueryString('token', util.getCookie('token'));
+
+        // 注册常驻节点
+        for (var i in this.persistNodes) {
+            cc.game.addPersistRootNode(this.persistNodes[i]);
+        }
 
         if (util.isDefine(uname) && util.isDefine(token)) {
             this.valiToken(uname, token);

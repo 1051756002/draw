@@ -1,6 +1,7 @@
 import "msg-socket-login.proto";
 import "msg-socket-room.proto";
 import "msg-socket-draw.proto";
+import "msg-socket-question.proto";
 
 // 回馈结果
 // [服务端发送, 组合]
@@ -30,4 +31,27 @@ message S_RoomUser_Msg {
 	optional	string	headimg = 3;	// 头像
 	optional	int32	identity = 4;	// 身份, 0.成员 1.房主
 	optional	int32	status = 5;		// 状态, 0.未准备 1.已准备
+}
+
+// 问题信息
+// [服务端发送, 组合]
+message S_Question_Msg {
+	optional	int32	id = 1;			// ID
+	optional	string	answer = 2;		// 答案
+	optional	string	hint = 3;		// 暗示
+}
+
+// 坐标点
+// [服务端发送, 组合]
+message S_Point_Msg {
+	optional	int32	x = 1;
+	optional	int32	y = 2;
+}
+
+// 线条
+// [服务端发送, 组合]
+message S_Line_Msg {
+	repeated	S_Point_Msg	points = 1;		// 坐标列表
+	optional	int32		width = 2;		// 线条粗细
+	optional	string		color = 3;		// 线条颜色
 }
