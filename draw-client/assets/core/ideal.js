@@ -17,7 +17,7 @@ window.console.timeEnd = function() {};
 
 // 重定向, 获取本地IP地址
 config.server.forEach(function(server) {
-	server.address = '192.168.199.195';
+	server.address = '192.168.1.120';
 });
 
 // 初始化架构

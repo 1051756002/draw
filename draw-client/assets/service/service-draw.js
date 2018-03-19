@@ -63,6 +63,9 @@ let send_draw = function(data) {
 	});
 	let bodyBuff = model.encode(example).finish();
 
+	util.log(example);
+	util.log(data.line);
+	
 	ideal.conn.sendMsg(CMD.Main, CMD.Sub_CMD_C_Draw, bodyBuff);
 };
 

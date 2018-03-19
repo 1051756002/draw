@@ -22,6 +22,7 @@ cc.Class({
     },
 
     unbindEvent: function() {
+        this.stopLive();
         this.node.off(cc.Node.EventType.TOUCH_START, this.onTouchBegan);
         this.node.off(cc.Node.EventType.TOUCH_MOVE, this.onTouchMoved);
         this.node.off(cc.Node.EventType.TOUCH_END, this.onTouchEnded);
@@ -106,6 +107,8 @@ cc.Class({
         var touchLoc = touch.getLocation();
         touchLoc = this.node.parent.convertToNodeSpaceAR(touchLoc);
         touchLoc = util.subPoint(touchLoc, this.node.position);
+        touchLoc.x = parseInt(touchLoc.x);
+        touchLoc.y = parseInt(touchLoc.y);
 
         this.path = this.group.addPath();
         this.path.fillColor = this.drawAttr.fillColor;
@@ -125,6 +128,8 @@ cc.Class({
         var touchLoc = touch.getLocation();
         touchLoc = this.node.parent.convertToNodeSpaceAR(touchLoc);
         touchLoc = util.subPoint(touchLoc, this.node.position);
+        touchLoc.x = parseInt(touchLoc.x);
+        touchLoc.y = parseInt(touchLoc.y);
 
         this.points.push(touchLoc);
         this.path.points(this.points);
@@ -154,7 +159,7 @@ cc.Class({
         // 提交笔画
         ideal.conn.send('draw', {
             line: {
-                points: this.points,
+                points: util.clone(this.points),
                 width: attr.lineWidth,
                 color: cc.colorToHex(attr.strokeColor),
             }

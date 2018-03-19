@@ -131,8 +131,6 @@ let recv_answer = function(bodyBuff) {
 	let room = ideal.data.roomlist[roomid];
 	// 当前用户名
 	let username = this.user.username;
-	// 题目
-	let question = util.okey(ideal.data.questionlist, 'id', example.questionid);
 
 	let data = { result: {}, roomid: roomid };
 
@@ -152,6 +150,9 @@ let recv_answer = function(bodyBuff) {
 		data.result.errmsg = '没有答题权限!';
 	}
 	else {
+		// 题目
+		let question = util.okey(ideal.data.questionlist, 'id', room.topic.questionid);
+		
 		// 回答正确
 		if (example.answer == question.answer) {
 			data.result.code = 0;
@@ -161,6 +162,9 @@ let recv_answer = function(bodyBuff) {
 			data.result.code = 4;
 			data.result.errmsg = '回答错误!';
 		}
+
+		// 回答内容
+		data.answer = example.answer;
 
 		// ############ 通知房间内的其他玩家
 		service.notice.call(this, roomid, CMD.Main, CMD.Sub_CMD_P_Answer, {

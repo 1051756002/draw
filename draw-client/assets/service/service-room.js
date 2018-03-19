@@ -140,6 +140,9 @@ let recv_play = function(bodyBuff) {
 	let model = protobuf['S_RoomPlay_FbMsg'];
 	let example = model.decode(bodyBuff);
 
+	// 更新房间用户列表
+	ideal.data.room.userlist = example.userlist;
+
 	ideal.conn.emit('play.feedback', example);
 };
 

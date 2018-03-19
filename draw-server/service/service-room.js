@@ -321,12 +321,6 @@ let recv_play = function(bodyBuff) {
 			data.result.code = 0;
 			room.status = 1;
 
-			// ############ 通知房间内的其他玩家
-			service.notice.call(this, roomid, CMD.Main, CMD.Sub_CMD_P_Play, {
-				roomid: roomid,
-				userlist: ideal.data.getRoomUserList(roomid),
-			});
-
 			// ############ 有序的给一名玩家推送题目
 			let username = ideal.data.getTopicUser(roomid);
 			let CMDQ = require('./config')['Main_CMD_Question'];
@@ -340,6 +334,15 @@ let recv_play = function(bodyBuff) {
 
 			// 当前题库, 设置出题人
 			room.topic.username = username;
+
+			// ############ 通知房间内的其他玩家
+			service.notice.call(this, roomid, CMD.Main, CMD.Sub_CMD_P_Play, {
+				roomid: roomid,
+				userlist: ideal.data.getRoomUserList(roomid),
+			});
+
+			// 返回房间用户列表
+			data.userlist = ideal.data.getRoomUserList(roomid);
 		} else {
 			// 还有人没有准备
 			data.result.code = 4;

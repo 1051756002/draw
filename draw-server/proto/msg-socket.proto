@@ -31,6 +31,7 @@ message S_RoomUser_Msg {
 	optional	string	headimg = 3;	// 头像
 	optional	int32	identity = 4;	// 身份, 0.成员 1.房主
 	optional	int32	status = 5;		// 状态, 0.未准备 1.已准备
+	optional	int32	active = 6;		// 状态, 0.答题者 1.出题者
 }
 
 // 问题信息

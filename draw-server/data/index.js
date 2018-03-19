@@ -34,9 +34,10 @@ Object.defineProperty(data, 'questionlist', {
 // 获取房间内的用户列表
 data.getRoomUserList = function(roomid) {
 	let userlist = [];
-	for (let uname in this.roomlist[roomid].userlist) {
+	let room = this.roomlist[roomid];
+	for (let uname in room.userlist) {
 		let user = util.clone(this.userlist[uname]);
-		let ruser = this.roomlist[roomid].userlist[uname];
+		let ruser = room.userlist[uname];
 
 		// 找不到此用户
 		if (util.isEmpty(user)) {
@@ -49,6 +50,7 @@ data.getRoomUserList = function(roomid) {
 			headimg: user.headimg,
 			identity: ruser.identity,
 			status: ruser.status,
+			active: room.topic.username == uname ? 1 : 0,
 		});
 	};
 	return userlist;

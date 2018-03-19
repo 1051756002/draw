@@ -92,6 +92,7 @@ cc.Class({
             return;
         }
 
+        
         cc.director.loadScene('main');
     },
 

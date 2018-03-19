@@ -32,15 +32,15 @@ message S_Choice_Msg {
 // [客户端发送]
 message C_Answer_Msg {
 	optional	int32			roomid = 1;			// 房间ID
-	optional	int32			questionid = 2;		// 问题ID
-	optional	string			answer = 3;			// 答案
+	optional	string			answer = 2;			// 答案
 }
 
 // Sub_CMD_S_Answer
 // [服务端发送]
 message S_Answer_FbMsg {
 	optional	int32			roomid = 1;			// 房间ID
-	optional	S_Result_Msg	result = 2;			// 回馈结果
+	optional	string			answer = 2;			// 答案
+	optional	S_Result_Msg	result = 3;			// 回馈结果
 }
 
 // Sub_CMD_P_Answer

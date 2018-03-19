@@ -63,8 +63,7 @@ let send_choice = function(data) {
 let send_answer = function(data) {
 	let model = protobuf['C_Answer_Msg'];
 	let example = model.create({
-		roomid: data.roomid,
-		questionid: data.questionid,
+		roomid: ideal.data.room.roomid,
 		answer: data.answer,
 	});
 	let bodyBuff = model.encode(example).finish();
@@ -95,7 +94,7 @@ let recv_answer = function(bodyBuff) {
 
 	// 请求失败
 	let result = example.result;
-	if (result.code != 0) {
+	if (result.code != 0 && result.code != 4) {
 		util.showTips(result.errmsg);
 		return;
 	}

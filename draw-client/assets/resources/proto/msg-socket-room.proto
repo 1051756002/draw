@@ -77,6 +77,7 @@ message C_RoomPlay_Msg {
 message S_RoomPlay_FbMsg {
 	optional	int32			roomid = 1;		// 房间ID
 	optional	S_Result_Msg	result = 2;		// 回馈结果
+	repeated	S_RoomUser_Msg	userlist = 3;	// 房间内的玩家列表
 }
 
 // Sub_CMD_P_Play
