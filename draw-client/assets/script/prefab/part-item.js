@@ -29,6 +29,10 @@ cc.Class({
 
         // 修改身份样式
         this.updateStyle(data.active);
+        
+        this.laySuspension.stopAllActions();
+        this.laySuspension.runAction(cc.fadeOut());
+        this.hook.active = false;
     },
 
     onDestroy: function() {

@@ -38,6 +38,9 @@ config.cdf = {
 	head: [1005],
 };
 
+// 游戏时间
+config.gametime = 100 * 1000;
+
 // proto文件列表
 config.protolist = [
 	'./proto/msg-socket.proto',

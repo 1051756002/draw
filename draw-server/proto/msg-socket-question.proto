@@ -51,3 +51,12 @@ message S_Answer_Msg {
 	optional	string			answer = 3;			// 答案
 	optional	int32			correct = 4;		// 回答结果 1.正确 0.错误
 }
+
+// Sub_CMD_P_Publish
+// [服务端发送]
+message S_Publish_Msg {
+	optional	int32			roomid = 1;			// 房间ID
+	optional	S_Question_Msg	question = 2;		// 问题信息
+	repeated	S_RoomUser_Msg	userlist = 3;		// 房间内的玩家列表
+	optional	int32			gameover = 4;		// 状态 1.游戏结束 0.游戏未结束
+}

@@ -13,8 +13,24 @@ db.t_user.insert([
         "password" : "gwx199416520",
         "token" : "a6468940-282d-11e8-bb7a-61c2384ef86e",
         "onlinetime" : 1521103716308,
-        "nick" : "秀姑娘",
+        "nick" : "super",
         "headimg" : "img/head/head-14"
+    }, 
+    {
+        "username" : "test-1",
+        "password" : "newlife",
+        "token" : "a6468940-282d-11e8-bb7a-61c2384ef86e",
+        "onlinetime" : 1521103716308,
+        "nick" : "大内高手",
+        "headimg" : "img/head/head-9"
+    }, 
+    {
+        "username" : "test-2",
+        "password" : "newlife",
+        "token" : "a6468940-282d-11e8-bb7a-61c2384ef86e",
+        "onlinetime" : 1521103716308,
+        "nick" : "专业擒拿你",
+        "headimg" : "img/head/head-11"
     }
 ]);
 

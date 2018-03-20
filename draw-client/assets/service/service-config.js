@@ -43,6 +43,7 @@ module.exports = {
 		Sub_CMD_P_GetQuestion: 2001,	// [回馈] 获取题目
 		Sub_CMD_P_Choice: 2002,			// [推送] 选择题目
 		Sub_CMD_P_Answer: 2003,			// [推送] 提交答案
+		Sub_CMD_P_Publish: 2004,		// [推送] 公布答案
 	},
 	Main_CMD_Draw: {
 		// 主指令

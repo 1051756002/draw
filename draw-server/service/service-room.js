@@ -118,10 +118,13 @@ let recv_match = function(bodyBuff) {
 		'%roomid%': {
 			roomid: '%roomid%',
 			status: '0.空闲 1.进行中',
-			hist: ['%username%'],  历史记录, 记录出过题的账号
+			hist: ['%username%'],  历史记录, 记录出过题的用户
+			stid: 'setTimeoutID',
 			topic: {
+				starttime: '开始时间',
 				questionid: '问题ID',
 				username: %username%,
+				winner: ['%username%'], 已经答对的用户
 			},
 			userlist: {
 				'%username%': {
@@ -161,7 +164,11 @@ let recv_match = function(bodyBuff) {
 			roomid: roomid,
 			status: 0,
 			hist: [],
-			topic: {},
+			stid: 0,
+			topic: {
+				starttime: 0,
+				winner: [],
+			},
 			userlist: {}
 		};
 		// 加入此房间, 房主; 默认为已准备

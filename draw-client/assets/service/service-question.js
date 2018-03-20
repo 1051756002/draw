@@ -39,6 +39,9 @@ service.parseMsg = function(mainCmd, subCmd, bodyBuff) {
 		case CMD.Sub_CMD_P_Answer:
 			push_answer(bodyBuff);
 			break;
+		case CMD.Sub_CMD_P_Publish:
+			push_publish(bodyBuff);
+			break;
 		default:
 			exist = false;
 			break;
@@ -123,8 +126,19 @@ let push_answer = function(bodyBuff) {
 	let model = protobuf['S_Answer_Msg'];
 	let example = model.decode(bodyBuff);
 
-	util.log('push.answer', example);
 	ideal.conn.emit('push.answer', example);
+};
+
+let push_publish = function(bodyBuff) {
+	let model = protobuf['S_Publish_Msg'];
+	let example = model.decode(bodyBuff);
+
+	// 更新房间用户列表
+	if (example.userlist) {
+		ideal.data.room.userlist = example.userlist;
+	}
+
+	ideal.conn.emit('push.publish', example);
 };
 
 module.exports = service;

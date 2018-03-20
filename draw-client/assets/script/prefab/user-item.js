@@ -12,13 +12,15 @@ cc.Class({
     	// 昵称
         this.lblNick.string = data.nick;
 
-        // 头像
-        if (util.isDefine(data.headimg)) {
-	        cc.loader.loadRes(data.headimg, cc.SpriteFrame, function(err, spriteFrame) {
-	        	if (err) { return; }
-	        	this.sprHead.spriteFrame = spriteFrame;
-	        }.bind(this));
+        if (data.headimg.length == 0) {
+            data.headimg = 'img/head/head-7';
         }
+
+        // 头像
+        cc.loader.loadRes(data.headimg, cc.SpriteFrame, function(err, spriteFrame) {
+        	if (err) { return; }
+        	this.sprHead.spriteFrame = spriteFrame;
+        }.bind(this));
 
         // 已准备标识
         this.layReady.active = data.status == 1 && data.identity != 1;

@@ -19,6 +19,8 @@ cc.Class({
         } else {
             cc.director.loadScene('login');
         }
+
+        util.log('index.js loaded');
     },
 
     valiToken: function(uname, token) {

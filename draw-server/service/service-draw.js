@@ -96,6 +96,8 @@ let recv_draw = function(bodyBuff) {
 	let room = ideal.data.roomlist[roomid];
 	// 当前用户名
 	let username = this.user.username;
+	// 当前题目
+	let topic = room.topic;
 
 	let data = { result: {}, roomid: roomid };
 
@@ -110,9 +112,14 @@ let recv_draw = function(bodyBuff) {
 		data.result.errmsg = '房间未开始游戏!';
 	}
 	// 非出题人
-	else if (room.topic.username != username) {
+	else if (topic.username != username) {
 		data.result.code = 3;
 		data.result.errmsg = '没有权限!';
+	}
+	// 本场精彩已结束, 提前一秒拒绝抢答
+	else if (Date.now() >= topic.starttime + config.gametime - 1000) {
+		data.result.code = 5;
+		data.result.errmsg = '本场精彩已结束!';
 	}
 	else {
 		data.result.code = 0;
